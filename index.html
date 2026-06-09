@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Funciones Python Parte 2 - Ecuaciones & Análisis Lógico</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #21262d;
+            --primary: #2ea043;
+            --primary-dim: #1a7f37;
+            --text: #e6edf3;
+            --text-dim: #7d8590;
+            --accent: #f778ba;
+            --warning: #fbbf24;
+            --code-bg: #0d1117;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a7f37, #2ea043);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(46, 160, 67, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.95);
+            font-weight: 500;
+        }
+
+        .nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid var(--surface-2);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--surface-2);
+        }
+
+        .ejercicio {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .ejercicio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .ejercicio-numero {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .dificultad {
+            font-size: 0.85em;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .dificultad.basico {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .dificultad.intermedio {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .dificultad.avanzado {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .ejercicio-titulo {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .ejercicio-descripcion {
+            color: var(--text-dim);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--surface-2);
+            overflow-x: auto;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .code-header {
+            font-weight: 700;
+            font-size: 0.9em;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--surface-2);
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .code-block:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .btn-pista {
+            background: var(--warning);
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-pista:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+        }
+
+        .pista {
+            display: none;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05));
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .pista.visible {
+            display: block;
+        }
+
+        .pista-titulo {
+            font-weight: 700;
+            color: var(--warning);
+            margin-bottom: 10px;
+        }
+
+        .pista-contenido {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        code {
+            background: rgba(46, 160, 67, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: #10b981;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--surface);
+            border-radius: 16px;
+            color: var(--text-dim);
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .section { padding: 15px; }
+            .nav { position: static; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button class="nav-btn" onclick="window.print()">🖨️ Imprimir</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🐍 Funciones Python - Parte 2</h1>
+            <div class="subtitle">Ecuaciones, Promedios & Análisis Lógico · Taller 3°2°</div>
+        </header>
+
+        <!-- ========== ECUACIONES (1-10) ========== -->
+        <div class="section">
+            <div class="section-title">📐 ECUACIONES MATEMÁTICAS (Ejercicios 1-10)</div>
+            <p style="margin-bottom: 25px; color: var(--text-dim);">
+                Trabaja con fórmulas, conversiones y ecuaciones de segundo grado.
+            </p>
+
+            <!-- E1 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 1</div>
+                    <div class="dificultad basico">Básico</div>
+                </div>
+                <div class="ejercicio-titulo">Ecuación cuadrática: Discriminante</div>
+                <div class="ejercicio-descripcion">
+                    Dada una ecuación cuadrática <code>ax² + bx + c = 0</code>, crea una función que calcule el discriminante (Δ = b² - 4ac).
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def discriminante(a, b, c):
+    # TODO: Retorna b² - 4*a*c
+    pass
+
+print(discriminante(1, -5, 6))   # 1
+print(discriminante(1, 2, 5))    # -16</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        La fórmula del discriminante es <code>b**2 - 4*a*c</code>. En Python, <code>**</code> es la potencia.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E2 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 2</div>
+                    <div class="dificultad basico">Básico</div>
+                </div>
+                <div class="ejercicio-titulo">Fórmula de densidad</div>
+                <div class="ejercicio-descripcion">
+                    La densidad se calcula como <code>ρ = m / V</code> (masa / volumen). 
+                    Crea una función que calcule la densidad en kg/m³.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def densidad(masa_kg, volumen_m3):
+    # TODO: Calcula masa / volumen
+    pass
+
+print(densidad(100, 10))   # 10.0
+print(densidad(50, 2))     # 25.0</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Solo divide la masa por el volumen y retorna el resultado.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E3 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 3</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Ley de Ohm</div>
+                <div class="ejercicio-descripcion">
+                    La Ley de Ohm: <code>V = I × R</code> (Voltaje = Corriente × Resistencia).
+                    Crea una función que calcule el voltaje dado la corriente (amperios) y resistencia (ohmios).
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def ley_ohm_voltaje(corriente, resistencia):
+    # TODO: Retorna corriente * resistencia
+    pass
+
+print(ley_ohm_voltaje(2, 5))    # 10
+print(ley_ohm_voltaje(0.5, 10)) # 5.0</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Multiplica la corriente por la resistencia. Es una fórmula de 2 multiplicandos.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E4 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 4</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Energía cinética</div>
+                <div class="ejercicio-descripcion">
+                    La energía cinética: <code>EC = ½ × m × v²</code> (masa × velocidad²).
+                    Crea una función que calcule la energía cinética en Joules.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def energia_cinetica(masa, velocidad):
+    # TODO: Retorna 0.5 * masa * velocidad²
+    pass
+
+print(energia_cinetica(10, 5))  # 125.0
+print(energia_cinetica(2, 3))   # 9.0</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        <code>0.5 * masa * velocidad**2</code>. Recordá que <code>**2</code> es elevar al cuadrado.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E5 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 5</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Raíces de ecuación cuadrática</div>
+                <div class="ejercicio-descripcion">
+                    Usa el discriminante del ejercicio 1 para calcular las 2 raíces de una ecuación cuadrática.
+                    Fórmula: <code>x = (-b ± √Δ) / 2a</code>
+                    <br>Crea una función que retorne una tupla con las dos raíces (x1, x2).
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>import math
+
+def raices_cuadratica(a, b, c):
+    # TODO: Usa el discriminante y retorna (x1, x2)
+    pass
+
+print(raices_cuadratica(1, -5, 6))   # (3.0, 2.0) o (2.0, 3.0)
+print(raices_cuadratica(1, 0, -4))   # (2.0, -2.0)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Calcula el discriminante (Δ = b² - 4ac)
+                        <br>2. Calcula x1 = (-b + √Δ) / 2a
+                        <br>3. Calcula x2 = (-b - √Δ) / 2a
+                        <br>4. Retorna (x1, x2)
+                        <br><br>Usa <code>math.sqrt()</code> para la raíz cuadrada.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E6 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 6</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Conversión de unidades: Presión</div>
+                <div class="ejercicio-descripcion">
+                    Crea una función que convierta Pascales a bares. Fórmula: <code>1 bar = 100,000 Pa</code>
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def pascales_a_bar(pascales):
+    # TODO: Divide por 100000
+    pass
+
+print(pascales_a_bar(100000))   # 1.0
+print(pascales_a_bar(50000))    # 0.5</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Divide los pascales entre 100000 para obtener bares.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E7 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 7</div>
+                    <div class="dificultad avanzado">Avanzado</div>
+                </div>
+                <div class="ejercicio-titulo">Índice de Masa Corporal (IMC)</div>
+                <div class="ejercicio-descripcion">
+                    El IMC se calcula como <code>IMC = peso / (altura²)</code> donde peso está en kg y altura en metros.
+                    Crea una función que:
+                    <br>1. Calcule el IMC
+                    <br>2. Retorne una tupla (imc, categoría) donde categoría es "Bajo peso", "Normal", "Sobrepeso" o "Obeso"
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def calcular_imc(peso_kg, altura_m):
+    # TODO: Calcula IMC y retorna (imc, categoría)
+    # Bajo peso: < 18.5
+    # Normal: 18.5 - 24.9
+    # Sobrepeso: 25 - 29.9
+    # Obeso: >= 30
+    pass
+
+print(calcular_imc(70, 1.75))  # (22.86, "Normal")
+print(calcular_imc(85, 1.70))  # (29.41, "Sobrepeso")</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Calcula <code>imc = peso_kg / (altura_m ** 2)</code>
+                        <br>2. Usa <code>if/elif/else</code> para clasificar según el rango
+                        <br>3. Redondea a 2 decimales con <code>round(imc, 2)</code>
+                        <br>4. Retorna una tupla: <code>(imc_redondeado, categoria)</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PROMEDIOS & ESTADÍSTICA (11-20) ========== -->
+        <div class="section">
+            <div class="section-title">📊 PROMEDIOS & ESTADÍSTICA (Ejercicios 11-20)</div>
+            <p style="margin-bottom: 25px; color: var(--text-dim);">
+                Trabaja con listas, cálculos estadísticos y análisis de datos.
+            </p>
+
+            <!-- E11 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 11</div>
+                    <div class="dificultad basico">Básico</div>
+                </div>
+                <div class="ejercicio-titulo">Promedio de notas</div>
+                <div class="ejercicio-descripcion">
+                    Crea una función que reciba una lista de notas y retorne el promedio.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def promedio(notas):
+    # TODO: Suma todas y divide por cantidad
+    pass
+
+print(promedio([7, 8, 9]))      # 8.0
+print(promedio([10, 6, 8, 9]))  # 8.25</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Usa <code>sum(notas)</code> para sumar y <code>len(notas)</code> para contar elementos.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E12 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 12</div>
+                    <div class="dificultad basico">Básico</div>
+                </div>
+                <div class="ejercicio-titulo">Mayor y Menor de una lista</div>
+                <div class="ejercicio-descripcion">
+                    Crea una función que retorne una tupla (máximo, mínimo) de una lista de números.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def mayor_menor(numeros):
+    # TODO: Retorna (máximo, mínimo)
+    pass
+
+print(mayor_menor([3, 7, 2, 9, 1]))  # (9, 1)
+print(mayor_menor([100, 50, 75]))    # (100, 50)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Usa <code>max()</code> y <code>min()</code> de Python para encontrar el mayor y menor.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E13 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 13</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Mediana de un conjunto</div>
+                <div class="ejercicio-descripcion">
+                    La mediana es el valor central cuando los datos están ordenados.
+                    Si hay cantidad par de elementos, es el promedio de los 2 del medio.
+                    <br><strong>Ejemplo:</strong> [1, 3, 5, 7] → mediana = (3+5)/2 = 4
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def mediana(numeros):
+    # TODO: Retorna el valor central
+    pass
+
+print(mediana([1, 3, 5]))        # 3
+print(mediana([1, 2, 3, 4]))     # 2.5
+print(mediana([7, 2, 9, 1, 5]))  # 5</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Ordena la lista con <code>sorted()</code>
+                        <br>2. Calcula la posición central: <code>n = len(numeros)</code>
+                        <br>3. Si <code>n</code> es impar, retorna <code>sorted_list[n//2]</code>
+                        <br>4. Si es par, retorna el promedio de los 2 del medio
+                    </div>
+                </div>
+            </div>
+
+            <!-- E14 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 14</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Desviación Estándar</div>
+                <div class="ejercicio-descripcion">
+                    La desviación estándar mide qué tan dispersos están los datos.
+                    Fórmula: <code>σ = √(suma de (xi - promedio)² / n)</code>
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>import math
+
+def desviacion_estandar(numeros):
+    # TODO: Calcula la desviación estándar
+    pass
+
+print(desviacion_estandar([10, 20, 30]))     # 8.16
+print(desviacion_estandar([5, 5, 5, 5]))     # 0.0</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Calcula el promedio
+                        <br>2. Para cada número, calcula <code>(numero - promedio)**2</code>
+                        <br>3. Suma todos esos cuadrados
+                        <br>4. Divide por la cantidad de elementos
+                        <br>5. Toma la raíz cuadrada con <code>math.sqrt()</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E15 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 15</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Promedio ponderado</div>
+                <div class="ejercicio-descripcion">
+                    El promedio ponderado asigna pesos/importancias diferentes a cada nota.
+                    Fórmula: <code>PP = (n1×p1 + n2×p2 + n3×p3) / (p1 + p2 + p3)</code>
+                    <br>Recibe dos listas: notas y pesos (importancias).
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def promedio_ponderado(notas, pesos):
+    # TODO: Calcula el promedio ponderado
+    pass
+
+print(promedio_ponderado([8, 9, 7], [0.3, 0.4, 0.3]))  # 8.1
+print(promedio_ponderado([10, 6], [0.5, 0.5]))         # 8.0</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Usa <code>zip(notas, pesos)</code> para empareja cada nota con su peso
+                        <br>2. Calcula: suma de <code>(nota * peso)</code>
+                        <br>3. Divide por: suma de todos los pesos
+                    </div>
+                </div>
+            </div>
+
+            <!-- E16 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 16</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Moda (valor más frecuente)</div>
+                <div class="ejercicio-descripcion">
+                    La moda es el valor que aparece más veces en una lista.
+                    <br><strong>Reto:</strong> Si hay empate, retorna el primero encontrado.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def moda(numeros):
+    # TODO: Retorna el valor más frecuente
+    pass
+
+print(moda([1, 2, 2, 3, 3, 3, 4]))  # 3
+print(moda([5, 5, 5]))              # 5</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Usa <code>max(set(numeros), key=numeros.count)</code>
+                        <br>O bien:
+                        <br>2. Crea un diccionario con <code>número: cantidad</code>
+                        <br>3. Encuentra la clave con el valor más alto
+                    </div>
+                </div>
+            </div>
+
+            <!-- E17 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 17</div>
+                    <div class="dificultad avanzado">Avanzado</div>
+                </div>
+                <div class="ejercicio-titulo">Rango Intercuartílico (IQR)</div>
+                <div class="ejercicio-descripcion">
+                    El IQR mide la dispersión del 50% central de los datos.
+                    <br>IQR = Q3 - Q1 (donde Q1 es el percentil 25 y Q3 es el percentil 75)
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def rango_intercuartil(numeros):
+    # TODO: Retorna Q3 - Q1
+    pass
+
+print(rango_intercuartil([1, 2, 3, 4, 5, 6, 7, 8, 9]))  # 4.5 o similar</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Usa <code>import numpy as np</code> y luego <code>np.percentile()</code>
+                        <br>O calcula manualmente dividiendo la lista en cuartiles y encontrando Q1 y Q3.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ANÁLISIS LÓGICO (21-30) ========== -->
+        <div class="section">
+            <div class="section-title">🧠 ANÁLISIS LÓGICO & ENUNCIADOS COMPLEJOS (Ejercicios 21-30)</div>
+            <p style="margin-bottom: 25px; color: var(--text-dim);">
+                Interpreta problemas reales, toma decisiones basadas en criterios múltiples.
+            </p>
+
+            <!-- E21 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 21</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Sistema de calificación</div>
+                <div class="ejercicio-descripcion">
+                    Una escuela usa este sistema:
+                    <br>• 0-4: Insuficiente (I)
+                    <br>• 4-6: Regular (R)
+                    <br>• 6-8: Bueno (B)
+                    <br>• 8-10: Excelente (E)
+                    <br>Crea una función que reciba una nota y retorne la letra correspondiente.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def calificacion(nota):
+    # TODO: Retorna I, R, B o E según el rango
+    pass
+
+print(calificacion(3))   # "I"
+print(calificacion(7))   # "B"
+print(calificacion(9))   # "E"</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Usa <code>if/elif/else</code> para comparar ranges. Ojo con los límites: ¿4 es Regular o Insuficiente?
+                    </div>
+                </div>
+            </div>
+
+            <!-- E22 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 22</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Aprobación de un curso</div>
+                <div class="ejercicio-descripcion">
+                    <strong>Criterio:</strong> Un alumno aprueba si:
+                    <br>• Promedio >= 6 Y
+                    <br>• Asistencia >= 80% Y
+                    <br>• Parcial >= 4
+                    <br>Retorna True/False
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def aprobado_curso(promedio, asistencia, parcial):
+    # TODO: Retorna True si cumple TODOS los criterios
+    pass
+
+print(aprobado_curso(7, 85, 5))   # True
+print(aprobado_curso(7, 75, 5))   # False (asistencia baja)
+print(aprobado_curso(5, 85, 5))   # False (promedio bajo)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Usa operadores lógicos <code>and</code>. Todos los criterios deben cumplirse simultáneamente.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E23 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 23</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Descuento progresivo</div>
+                <div class="ejercicio-descripcion">
+                    Una tienda ofrece descuentos según cantidad:
+                    <br>• 1-10 unidades: sin descuento
+                    <br>• 11-50: 10% descuento
+                    <br>• 51-100: 15% descuento
+                    <br>• 100+: 20% descuento
+                    <br>Calcula el precio final.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def precio_con_descuento(cantidad, precio_unitario):
+    # TODO: Calcula el descuento y retorna precio final
+    pass
+
+print(precio_con_descuento(10, 100))   # 1000
+print(precio_con_descuento(50, 100))   # 4500
+print(precio_con_descuento(100, 100))  # 8000</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Calcula el subtotal: <code>cantidad * precio_unitario</code>
+                        <br>2. Determina el % de descuento según la cantidad
+                        <br>3. Aplica el descuento: <code>subtotal * (1 - descuento/100)</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E24 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 24</div>
+                    <div class="dificultad avanzado">Avanzado</div>
+                </div>
+                <div class="ejercicio-titulo">Gestión de inventario</div>
+                <div class="ejercicio-descripcion">
+                    <strong>Situación:</strong> Un producto tiene cantidad en stock y demanda.
+                    <br>• Si stock >= demanda: retorna ("Disponible", cantidad_a_enviar, stock_nuevo)
+                    <br>• Si stock < demanda: retorna ("Parcial", stock, 0)
+                    <br>• Si stock es 0: retorna ("Agotado", 0, 0)
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def gestionar_stock(stock_actual, demanda):
+                        # TODO: Analiza y retorna tupla (estado, enviado, stock_nuevo)
+                        pass
+                        
+print(gestionar_stock(100, 30))  # ("Disponible", 30, 70)
+print(gestionar_stock(20, 50))   # ("Parcial", 20, 0)
+print(gestionar_stock(0, 10))    # ("Agotado", 0, 0)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Primero verifica si stock es 0
+                        <br>2. Luego si stock >= demanda
+                        <br>3. Sino, es parcial
+                        <br>4. En cada caso, calcula lo que se envía y el nuevo stock
+                    </div>
+                </div>
+            </div>
+
+            <!-- E25 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 25</div>
+                    <div class="dificultad avanzado">Avanzado</div>
+                </div>
+                <div class="ejercicio-titulo">Cálculo de jornada laboral</div>
+                <div class="ejercicio-descripcion">
+                    <strong>Reglas:</strong>
+                    <br>• Primeras 8 horas: tarifa normal
+                    <br>• Horas 9-10: 1.5x (adicional)
+                    <br>• Horas 11+: 2x (doble)
+                    <br>Calcula el monto total a pagar.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def calcular_salario(horas_trabajadas, tarifa_horaria):
+    # TODO: Aplica las reglas de jornada
+    pass
+
+print(calcular_salario(8, 100))   # 800
+print(calcular_salario(10, 100))  # 1100 (8*100 + 2*150)
+print(calcular_salario(12, 100))  # 1400 (8*100 + 2*150 + 2*200)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Las primeras 8 horas cuestan: <code>min(horas, 8) * tarifa</code>
+                        <br>2. Horas extras (9-10): <code>min(max(horas - 8, 0), 2) * tarifa * 1.5</code>
+                        <br>3. Horas dobles (11+): <code>max(horas - 10, 0) * tarifa * 2</code>
+                        <br>4. Suma todo
+                    </div>
+                </div>
+            </div>
+
+            <!-- E26 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 26</div>
+                    <div class="dificultad avanzado">Avanzado</div>
+                </div>
+                <div class="ejercicio-titulo">Evaluación de riesgo de crédito</div>
+                <div class="ejercicio-descripcion">
+                    <strong>Criterios de riesgo:</strong>
+                    <br>• Deuda/Ingresos < 30%: BAJO
+                    <br>• Deuda/Ingresos 30-60%: MEDIO
+                    <br>• Deuda/Ingresos > 60%: ALTO
+                    <br>Si ALTO, retorna descuento en tasa de 0%. Si BAJO, retorna 2% descuento.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def evaluar_credito(deuda_mensual, ingresos_mensual):
+    # TODO: Retorna (riesgo, descuento_tasa_interes)
+    pass
+
+print(evaluar_credito(2000, 10000))  # ("BAJO", 2)
+print(evaluar_credito(5000, 10000))  # ("MEDIO", 0)
+print(evaluar_credito(8000, 10000))  # ("ALTO", 0)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Calcula el ratio: <code>ratio = (deuda / ingresos) * 100</code>
+                        <br>2. Clasifica según rangos
+                        <br>3. Asigna descuento según el riesgo
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <strong>Prof. Pablo Limardo · Escuela Industrial N°9</strong>
+        <br>Taller de Programación 3°2° · Parte 2: Ecuaciones, Promedios & Análisis Lógico
+    </footer>
+
+    <script>
+        function togglePista(btn) {
+            const pista = btn.nextElementSibling;
+            if (pista.classList.contains('visible')) {
+                pista.classList.remove('visible');
+                btn.textContent = '💡 Ver Pista';
+            } else {
+                pista.classList.add('visible');
+                btn.textContent = '👁️ Ocultar Pista';
+            }
+        }
+
+        function copiarCodigo(btn) {
+            const codeBlock = btn.parentElement.querySelector('pre code');
+            const texto = codeBlock.textContent;
+            navigator.clipboard.writeText(texto).then(() => {
+                const textoOriginal = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                setTimeout(() => btn.textContent = textoOriginal, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
