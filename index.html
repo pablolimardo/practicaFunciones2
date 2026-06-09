@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios Funciones Python Parte 2 - Ecuaciones & Análisis Lógico</title>
+    <title>Ejercicios Funciones Python Parte 2 - 3°2°</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -275,12 +275,12 @@
     <div class="container">
         <header>
             <h1>🐍 Funciones Python - Parte 2</h1>
-            <div class="subtitle">Ecuaciones, Promedios & Análisis Lógico · Taller 3°2°</div>
+            <div class="subtitle">Ecuaciones & Problemas Prácticos · Taller 3°2°</div>
         </header>
 
-        <!-- ========== ECUACIONES (1-10) ========== -->
+        <!-- ========== ECUACIONES (1-7) ========== -->
         <div class="section">
-            <div class="section-title">📐 ECUACIONES MATEMÁTICAS (Ejercicios 1-10)</div>
+            <div class="section-title">📐 ECUACIONES MATEMÁTICAS (Ejercicios 1-7)</div>
             <p style="margin-bottom: 25px; color: var(--text-dim);">
                 Trabaja con fórmulas, conversiones y ecuaciones de segundo grado.
             </p>
@@ -369,7 +369,7 @@ print(ley_ohm_voltaje(0.5, 10)) # 5.0</code></pre>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        Multiplica la corriente por la resistencia. Es una fórmula de 2 multiplicandos.
+                        Multiplica la corriente por la resistencia.
                     </div>
                 </div>
             </div>
@@ -481,7 +481,7 @@ print(pascales_a_bar(50000))    # 0.5</code></pre>
                     El IMC se calcula como <code>IMC = peso / (altura²)</code> donde peso está en kg y altura en metros.
                     Crea una función que:
                     <br>1. Calcule el IMC
-                    <br>2. Retorne una tupla (imc, categoría) donde categoría es "Bajo peso", "Normal", "Sobrepeso" o "Obeso"
+                    <br>2. Retorne una tupla (imc, categoría) donde categoría es "Bajo peso", "Normal", "Sobrepeso" u "Obeso"
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
@@ -510,11 +510,11 @@ print(calcular_imc(85, 1.70))  # (29.41, "Sobrepeso")</code></pre>
             </div>
         </div>
 
-        <!-- ========== PROMEDIOS & ESTADÍSTICA (11-20) ========== -->
+        <!-- ========== PROBLEMAS PRÁCTICOS (11-20) ========== -->
         <div class="section">
-            <div class="section-title">📊 PROMEDIOS & ESTADÍSTICA (Ejercicios 11-20)</div>
+            <div class="section-title">💰 PROBLEMAS PRÁCTICOS (Ejercicios 11-20)</div>
             <p style="margin-bottom: 25px; color: var(--text-dim);">
-                Trabaja con listas, cálculos estadísticos y análisis de datos.
+                Problemas reales: dinero, validaciones, búsquedas, conteos y decisiones lógicas.
             </p>
 
             <!-- E11 -->
@@ -523,25 +523,26 @@ print(calcular_imc(85, 1.70))  # (29.41, "Sobrepeso")</code></pre>
                     <div class="ejercicio-numero">Ejercicio 11</div>
                     <div class="dificultad basico">Básico</div>
                 </div>
-                <div class="ejercicio-titulo">Promedio de notas</div>
+                <div class="ejercicio-titulo">Calcular vuelto en una tienda</div>
                 <div class="ejercicio-descripcion">
-                    Crea una función que reciba una lista de notas y retorne el promedio.
+                    Vás a una tienda, comprás algo que cuesta <code>precio</code> y pagás con <code>pago</code>.
+                    Crea una función que calcule el vuelto.
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>def promedio(notas):
-    # TODO: Suma todas y divide por cantidad
+                    <pre><code>def calcular_vuelto(precio, pago):
+    # TODO: Retorna pago - precio
     pass
 
-print(promedio([7, 8, 9]))      # 8.0
-print(promedio([10, 6, 8, 9]))  # 8.25</code></pre>
+print(calcular_vuelto(25.50, 50))   # 24.5
+print(calcular_vuelto(100, 100))    # 0</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        Usa <code>sum(notas)</code> para sumar y <code>len(notas)</code> para contar elementos.
+                        Resta el precio del pago para obtener el vuelto.
                     </div>
                 </div>
             </div>
@@ -550,27 +551,35 @@ print(promedio([10, 6, 8, 9]))  # 8.25</code></pre>
             <div class="ejercicio">
                 <div class="ejercicio-header">
                     <div class="ejercicio-numero">Ejercicio 12</div>
-                    <div class="dificultad basico">Básico</div>
+                    <div class="dificultad intermedio">Intermedio</div>
                 </div>
-                <div class="ejercicio-titulo">Mayor y Menor de una lista</div>
+                <div class="ejercicio-titulo">Validar si un password es fuerte</div>
                 <div class="ejercicio-descripcion">
-                    Crea una función que retorne una tupla (máximo, mínimo) de una lista de números.
+                    Un password es fuerte si:
+                    <br>• Tiene mínimo 8 caracteres Y
+                    <br>• Tiene al menos 1 número Y
+                    <br>• Tiene al menos 1 letra mayúscula
+                    <br>Retorna True/False
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>def mayor_menor(numeros):
-    # TODO: Retorna (máximo, mínimo)
+                    <pre><code>def password_fuerte(password):
+    # TODO: Verifica los 3 criterios
     pass
 
-print(mayor_menor([3, 7, 2, 9, 1]))  # (9, 1)
-print(mayor_menor([100, 50, 75]))    # (100, 50)</code></pre>
+print(password_fuerte("Hola1234"))      # True
+print(password_fuerte("hola1234"))      # False (sin mayúscula)
+print(password_fuerte("Hola"))          # False (menos de 8 caracteres)</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        Usa <code>max()</code> y <code>min()</code> de Python para encontrar el mayor y menor.
+                        1. <code>len(password) >= 8</code> para la longitud
+                        <br>2. <code>any(c.isdigit() for c in password)</code> para buscar números
+                        <br>3. <code>any(c.isupper() for c in password)</code> para mayúsculas
+                        <br>4. Usa <code>and</code> para que se cumplan TODOS
                     </div>
                 </div>
             </div>
@@ -579,33 +588,30 @@ print(mayor_menor([100, 50, 75]))    # (100, 50)</code></pre>
             <div class="ejercicio">
                 <div class="ejercicio-header">
                     <div class="ejercicio-numero">Ejercicio 13</div>
-                    <div class="dificultad intermedio">Intermedio</div>
+                    <div class="dificultad basico">Básico</div>
                 </div>
-                <div class="ejercicio-titulo">Mediana de un conjunto</div>
+                <div class="ejercicio-titulo">Buscar un producto en una lista</div>
                 <div class="ejercicio-descripcion">
-                    La mediana es el valor central cuando los datos están ordenados.
-                    Si hay cantidad par de elementos, es el promedio de los 2 del medio.
-                    <br><strong>Ejemplo:</strong> [1, 3, 5, 7] → mediana = (3+5)/2 = 4
+                    Tienes una lista de productos disponibles. Querés saber si un producto específico existe.
+                    Retorna True si existe, False si no.
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>def mediana(numeros):
-    # TODO: Retorna el valor central
+                    <pre><code>def existe_producto(producto, lista_productos):
+    # TODO: Retorna True si está en la lista, False si no
     pass
 
-print(mediana([1, 3, 5]))        # 3
-print(mediana([1, 2, 3, 4]))     # 2.5
-print(mediana([7, 2, 9, 1, 5]))  # 5</code></pre>
+productos = ["iPhone", "Samsung", "Google Pixel"]
+print(existe_producto("iPhone", productos))      # True
+print(existe_producto("Nokia", productos))       # False</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        1. Ordena la lista con <code>sorted()</code>
-                        <br>2. Calcula la posición central: <code>n = len(numeros)</code>
-                        <br>3. Si <code>n</code> es impar, retorna <code>sorted_list[n//2]</code>
-                        <br>4. Si es par, retorna el promedio de los 2 del medio
+                        Usa <code>in</code> para verificar si un elemento está en una lista.
+                        <br><code>return producto in lista_productos</code>
                     </div>
                 </div>
             </div>
@@ -614,34 +620,27 @@ print(mediana([7, 2, 9, 1, 5]))  # 5</code></pre>
             <div class="ejercicio">
                 <div class="ejercicio-header">
                     <div class="ejercicio-numero">Ejercicio 14</div>
-                    <div class="dificultad intermedio">Intermedio</div>
+                    <div class="dificultad basico">Básico</div>
                 </div>
-                <div class="ejercicio-titulo">Desviación Estándar</div>
+                <div class="ejercicio-titulo">Contar cuántos tienen descuento</div>
                 <div class="ejercicio-descripcion">
-                    La desviación estándar mide qué tan dispersos están los datos.
-                    Fórmula: <code>σ = √(suma de (xi - promedio)² / n)</code>
+                    Tienes una lista de precios. Querés saber cuántos productos están en oferta (precio < 100).
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>import math
-
-def desviacion_estandar(numeros):
-    # TODO: Calcula la desviación estándar
+                    <pre><code>def contar_en_oferta(precios):
+    # TODO: Retorna cantidad de productos con precio < 100
     pass
 
-print(desviacion_estandar([10, 20, 30]))     # 8.16
-print(desviacion_estandar([5, 5, 5, 5]))     # 0.0</code></pre>
+print(contar_en_oferta([50, 150, 80, 200, 90]))   # 3
+print(contar_en_oferta([100, 200, 300]))          # 0</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        1. Calcula el promedio
-                        <br>2. Para cada número, calcula <code>(numero - promedio)**2</code>
-                        <br>3. Suma todos esos cuadrados
-                        <br>4. Divide por la cantidad de elementos
-                        <br>5. Toma la raíz cuadrada con <code>math.sqrt()</code>
+                        Usa <code>sum()</code> con una condición: <code>sum(1 for precio in precios if precio < 100)</code>
                     </div>
                 </div>
             </div>
@@ -650,31 +649,27 @@ print(desviacion_estandar([5, 5, 5, 5]))     # 0.0</code></pre>
             <div class="ejercicio">
                 <div class="ejercicio-header">
                     <div class="ejercicio-numero">Ejercicio 15</div>
-                    <div class="dificultad intermedio">Intermedio</div>
+                    <div class="dificultad basico">Básico</div>
                 </div>
-                <div class="ejercicio-titulo">Promedio ponderado</div>
+                <div class="ejercicio-titulo">Encontrar el producto más caro</div>
                 <div class="ejercicio-descripcion">
-                    El promedio ponderado asigna pesos/importancias diferentes a cada nota.
-                    Fórmula: <code>PP = (n1×p1 + n2×p2 + n3×p3) / (p1 + p2 + p3)</code>
-                    <br>Recibe dos listas: notas y pesos (importancias).
+                    Tienes una lista de precios. Retorna el precio máximo.
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>def promedio_ponderado(notas, pesos):
-    # TODO: Calcula el promedio ponderado
+                    <pre><code>def producto_mas_caro(precios):
+    # TODO: Retorna el precio máximo
     pass
 
-print(promedio_ponderado([8, 9, 7], [0.3, 0.4, 0.3]))  # 8.1
-print(promedio_ponderado([10, 6], [0.5, 0.5]))         # 8.0</code></pre>
+print(producto_mas_caro([50, 150, 80, 200, 90]))   # 200
+print(producto_mas_caro([10, 5, 8]))               # 10</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        1. Usa <code>zip(notas, pesos)</code> para empareja cada nota con su peso
-                        <br>2. Calcula: suma de <code>(nota * peso)</code>
-                        <br>3. Divide por: suma de todos los pesos
+                        Usa la función <code>max()</code> de Python.
                     </div>
                 </div>
             </div>
@@ -685,29 +680,29 @@ print(promedio_ponderado([10, 6], [0.5, 0.5]))         # 8.0</code></pre>
                     <div class="ejercicio-numero">Ejercicio 16</div>
                     <div class="dificultad intermedio">Intermedio</div>
                 </div>
-                <div class="ejercicio-titulo">Moda (valor más frecuente)</div>
+                <div class="ejercicio-titulo">Validar email simple</div>
                 <div class="ejercicio-descripcion">
-                    La moda es el valor que aparece más veces en una lista.
-                    <br><strong>Reto:</strong> Si hay empate, retorna el primero encontrado.
+                    Un email es válido si contiene un <code>@</code> y tiene al menos un <code>.</code> después del <code>@</code>.
+                    <br>Retorna True/False.
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>def moda(numeros):
-    # TODO: Retorna el valor más frecuente
-    pass
-
-print(moda([1, 2, 2, 3, 3, 3, 4]))  # 3
-print(moda([5, 5, 5]))              # 5</code></pre>
+                    <pre><code>def email_valido(email):
+                        # TODO: Retorna True si tiene @ y . después del @
+                        pass
+                        
+print(email_valido("usuario@gmail.com"))    # True
+print(email_valido("usuario@gmail"))        # False (sin punto)
+print(email_valido("usuario.gmail.com"))    # False (sin @)</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        1. Usa <code>max(set(numeros), key=numeros.count)</code>
-                        <br>O bien:
-                        <br>2. Crea un diccionario con <code>número: cantidad</code>
-                        <br>3. Encuentra la clave con el valor más alto
+                        1. Verifica que <code>"@" in email</code>
+                        <br>2. Divide por <code>@</code>: <code>partes = email.split("@")</code>
+                        <br>3. Verifica que la segunda parte tenga un punto: <code>"." in partes[1]</code>
                     </div>
                 </div>
             </div>
@@ -716,36 +711,145 @@ print(moda([5, 5, 5]))              # 5</code></pre>
             <div class="ejercicio">
                 <div class="ejercicio-header">
                     <div class="ejercicio-numero">Ejercicio 17</div>
-                    <div class="dificultad avanzado">Avanzado</div>
+                    <div class="dificultad intermedio">Intermedio</div>
                 </div>
-                <div class="ejercicio-titulo">Rango Intercuartílico (IQR)</div>
+                <div class="ejercicio-titulo">¿Cuántos están arriba/debajo de ti?</div>
                 <div class="ejercicio-descripcion">
-                    El IQR mide la dispersión del 50% central de los datos.
-                    <br>IQR = Q3 - Q1 (donde Q1 es el percentil 25 y Q3 es el percentil 75)
+                    <strong>Situación:</strong> Tenés una lista de notas de tu clase. Querés saber en qué posición estás.
+                    <br>Crea una función que retorne cuántos alumnos están ARRIBA de tu nota y cuántos están DEBAJO.
+                    <br>Retorna una tupla: (arriba, debajo)
                 </div>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
-                    <pre><code>def rango_intercuartil(numeros):
-    # TODO: Retorna Q3 - Q1
+                    <pre><code>def posicion_en_clase(mi_nota, todas_las_notas):
+    # TODO: Cuenta cuántos tienen nota mayor y menor
     pass
 
-print(rango_intercuartil([1, 2, 3, 4, 5, 6, 7, 8, 9]))  # 4.5 o similar</code></pre>
+notas = [6, 7, 8, 5, 9, 10, 7, 8, 6]
+print(posicion_en_clase(8, notas))   # (2, 5) → 2 arriba, 5 debajo
+print(posicion_en_clase(10, notas))  # (0, 8) → Sos el mejor</code></pre>
                     <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
                 </div>
                 <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
                 <div class="pista">
                     <div class="pista-titulo">💡 Pista:</div>
                     <div class="pista-contenido">
-                        Usa <code>import numpy as np</code> y luego <code>np.percentile()</code>
-                        <br>O calcula manualmente dividiendo la lista en cuartiles y encontrando Q1 y Q3.
+                        1. Cuenta cuántos elementos de <code>todas_las_notas</code> son mayores que <code>mi_nota</code>
+                        <br>2. Cuenta cuántos son menores que <code>mi_nota</code>
+                        <br>3. Usa un bucle <code>for</code> o comprensión de lista
+                        <br>4. Retorna ambos como tupla: <code>(arriba, debajo)</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E18 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 18</div>
+                    <div class="dificultad basico">Básico</div>
+                </div>
+                <div class="ejercicio-titulo">Ordenar puntuaciones</div>
+                <div class="ejercicio-descripcion">
+                    Tienes una lista de puntuaciones de un videojuego. Querés ordenarlas de mayor a menor para hacer un ranking.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def ranking_puntuaciones(puntuaciones):
+    # TODO: Retorna la lista ordenada de mayor a menor
+    pass
+
+print(ranking_puntuaciones([100, 50, 200, 75, 150]))   # [200, 150, 100, 75, 50]
+print(ranking_puntuaciones([10, 5, 8]))                # [10, 8, 5]</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        Usa <code>sorted(puntuaciones, reverse=True)</code> para ordenar de mayor a menor.
+                    </div>
+                </div>
+            </div>
+
+            <!-- E19 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 19</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Calcular el total de una compra</div>
+                <div class="ejercicio-descripcion">
+                    Tienes una lista de precios de artículos en tu carrito de compras.
+                    <br>Crea una función que:
+                    <br>1. Sume todos los precios
+                    <br>2. Si el total >= 500, aplica 10% descuento
+                    <br>3. Retorna (total_original, total_final, descuento_aplicado)
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def calcular_compra(precios):
+    # TODO: Suma, aplica descuento si >= 500, retorna tupla
+    pass
+
+print(calcular_compra([100, 200, 150]))      # (450, 450, False)
+print(calcular_compra([200, 200, 150]))      # (550, 495, True)</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Suma todos los precios: <code>total = sum(precios)</code>
+                        <br>2. Si <code>total >= 500</code>, calcula: <code>total_final = total * 0.9</code>
+                        <br>3. Usa una variable para saber si se aplicó descuento
+                        <br>4. Retorna la tupla con los 3 valores
+                    </div>
+                </div>
+            </div>
+
+            <!-- E20 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 20</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Gestionar puntos de fidelización</div>
+                <div class="ejercicio-descripcion">
+                    <strong>Regla:</strong> Por cada $100 de compra, obtenés 10 puntos.
+                    <br>Crea una función que:
+                    <br>1. Reciba el monto de la compra
+                    <br>2. Calcule los puntos ganados
+                    <br>3. Si ya tenías puntos previos, súmalos
+                    <br>4. Si llegás a 100 puntos, usá 100 puntos para un descuento de $50
+                    <br>5. Retorna (puntos_finales, descuento_canjeado)
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def gestionar_puntos(monto_compra, puntos_anteriores=0):
+    # TODO: Calcula puntos, suma anteriores, canjea si llega a 100
+    pass
+
+print(gestionar_puntos(500, 0))          # (50, 0) → 50 puntos, sin descuento
+print(gestionar_puntos(800, 70))         # (30, 1) → 30 puntos, canjeaste 100</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Calcula puntos nuevos: <code>puntos_nuevos = (monto_compra // 100) * 10</code>
+                        <br>2. Suma anteriores: <code>puntos_totales = puntos_nuevos + puntos_anteriores</code>
+                        <br>3. Canjea si es >= 100: <code>descuentos = puntos_totales // 100</code>
+                        <br>4. Calcula puntos finales: <code>puntos_finales = puntos_totales % 100</code>
+                        <br>5. Retorna ambos valores
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ========== ANÁLISIS LÓGICO (21-30) ========== -->
+        <!-- ========== ANÁLISIS LÓGICO (21-27) ========== -->
         <div class="section">
-            <div class="section-title">🧠 ANÁLISIS LÓGICO & ENUNCIADOS COMPLEJOS (Ejercicios 21-30)</div>
+            <div class="section-title">🧠 ANÁLISIS LÓGICO & DECISIONES (Ejercicios 21-27)</div>
             <p style="margin-bottom: 25px; color: var(--text-dim);">
                 Interpreta problemas reales, toma decisiones basadas en criterios múltiples.
             </p>
@@ -872,9 +976,9 @@ print(precio_con_descuento(100, 100))  # 8000</code></pre>
                 <div class="code-block">
                     <div class="code-header">📝 Enunciado</div>
                     <pre><code>def gestionar_stock(stock_actual, demanda):
-                        # TODO: Analiza y retorna tupla (estado, enviado, stock_nuevo)
-                        pass
-                        
+    # TODO: Analiza y retorna tupla (estado, enviado, stock_nuevo)
+    pass
+
 print(gestionar_stock(100, 30))  # ("Disponible", 30, 70)
 print(gestionar_stock(20, 50))   # ("Parcial", 20, 0)
 print(gestionar_stock(0, 10))    # ("Agotado", 0, 0)</code></pre>
@@ -964,13 +1068,49 @@ print(evaluar_credito(8000, 10000))  # ("ALTO", 0)</code></pre>
                     </div>
                 </div>
             </div>
+
+            <!-- E27 -->
+            <div class="ejercicio">
+                <div class="ejercicio-header">
+                    <div class="ejercicio-numero">Ejercicio 27</div>
+                    <div class="dificultad intermedio">Intermedio</div>
+                </div>
+                <div class="ejercicio-titulo">Decidir si ir al cine</div>
+                <div class="ejercicio-descripcion">
+                    <strong>Vas al cine si:</strong>
+                    <br>• Tenés dinero (saldo >= precio_entrada) Y
+                    <br>• Hay una película que te gusta Y
+                    <br>• Tenés tiempo (tiempo_libre >= duración_película)
+                    <br>Retorna True/False y una razón si no podés ir.
+                </div>
+                <div class="code-block">
+                    <div class="code-header">📝 Enunciado</div>
+                    <pre><code>def ir_al_cine(saldo, precio_entrada, hay_pelicula, tiempo_libre, duracion_pelicula):
+    # TODO: Verifica todas las condiciones
+    pass
+
+print(ir_al_cine(500, 300, True, 180, 120))    # True
+print(ir_al_cine(200, 300, True, 180, 120))    # (False, "No tenés dinero")
+print(ir_al_cine(500, 300, False, 180, 120))   # (False, "No hay película")</code></pre>
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                </div>
+                <button class="btn-pista" onclick="togglePista(this)">💡 Ver Pista</button>
+                <div class="pista">
+                    <div class="pista-titulo">💡 Pista:</div>
+                    <div class="pista-contenido">
+                        1. Si no cumple algún criterio, retorna False con la razón
+                        <br>2. Si cumple todos, retorna True
+                        <br>3. Usa <code>if/elif/else</code> para cada condición
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 
     <footer>
         <strong>Prof. Pablo Limardo · Escuela Industrial N°9</strong>
-        <br>Taller de Programación 3°2° · Parte 2: Ecuaciones, Promedios & Análisis Lógico
+        <br>Taller de Programación 3°2° · Parte 2: Ecuaciones, Problemas Prácticos & Análisis Lógico
     </footer>
 
     <script>
